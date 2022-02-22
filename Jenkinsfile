@@ -58,9 +58,9 @@ def doDynamicParallelTestSteps() {
         tests["${shardNum}"] = {
             node('node') {
                 stage("Shard #${shardNum}") {
-                    docker.image('ci-cd/playwright:v1.17.1').inside {
+                    docker.image('mcr.microsoft.com/playwright:v1.17.1').inside {
                         git branch: 'master',
-                            credentialsId: 'cicd',
+                            credentialsId: 'meemoo-ci',
                             url: 'https://github.com/viaacode/playwright-demo.git'
                         catchError() {
                             sh "npx playwright test --shard=${shardNum}/${totalShards}"
